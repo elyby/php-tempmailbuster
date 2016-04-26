@@ -1,0 +1,25 @@
+{
+    "name": "ely/php-tempmailbuster",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ErickSkrauch",
+            "email": "erickskrauch@ely.by"
+        }
+    ],
+    "require": {
+        "php" : "~5.4|~7.0",
+        "lib-curl" : "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8 || ~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ely\\TempMailBuster\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
