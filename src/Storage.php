@@ -9,6 +9,14 @@ class Storage
     private $blacklist;
 
     /**
+     * @param array $blacklist
+     */
+    public function __construct(array $blacklist = [])
+    {
+        $this->blacklist = $blacklist;
+    }
+
+    /**
      * @return array with current blacklist
      */
     public function getBlacklist()
@@ -35,15 +43,6 @@ class Storage
     public function setBlacklist(array $items)
     {
         $this->blacklist = $items;
-
         return $this;
-    }
-
-    /**
-     * @param array $blacklist
-     */
-    public function __construct(array $blacklist = [])
-    {
-        $this->blacklist = $blacklist;
     }
 }

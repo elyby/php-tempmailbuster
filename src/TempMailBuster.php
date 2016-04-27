@@ -9,6 +9,14 @@ class TempMailBuster
     private $storage;
 
     /**
+     * @param Storage $storage
+     */
+    public function __construct(Storage $storage)
+    {
+        $this->storage = $storage;
+    }
+
+    /**
      * @return Storage
      */
     public function getStorage()
@@ -52,19 +60,10 @@ class TempMailBuster
 
     /**
      * @param array $list
-     *
      * @return string
      */
     protected function buildRegex(array $list)
     {
         return '/^(' . implode('|', $list) . ')$/';
-    }
-
-    /**
-     * @param Storage $storage
-     */
-    public function __construct(Storage $storage)
-    {
-        $this->storage = $storage;
     }
 }
