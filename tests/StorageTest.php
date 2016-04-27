@@ -12,18 +12,18 @@ class StorageTest extends \PHPUnit_Framework_TestCase
     public function testAppendToBlacklist()
     {
         $storage = new Storage(['item1']);
-        $storage->appendToBlacklist(['item2']);
+        $this->assertEquals($storage, $storage->appendToBlacklist(['item2']));
         $this->assertEquals(['item1', 'item2'], $storage->getBlacklist());
 
         $storage = new Storage(['item1']);
-        $storage->appendToBlacklist('item2');
+        $this->assertEquals($storage, $storage->appendToBlacklist('item2'));
         $this->assertEquals(['item1', 'item2'], $storage->getBlacklist());
     }
 
     public function testSetBlacklist()
     {
         $storage = new Storage(['item1']);
-        $storage->setBlacklist(['item2']);
+        $this->assertEquals($storage, $storage->setBlacklist(['item2']));
         $this->assertEquals(['item2'], $storage->getBlacklist());
     }
 }
