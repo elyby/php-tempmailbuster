@@ -26,4 +26,17 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($storage, $storage->appendItems('item2'));
         $this->assertEquals(['item1', 'item2'], $storage->getItems());
     }
+
+    public function testFromLoader()
+    {
+        $this->assertInstanceOf('Ely\TempmailBuster\Storage', Storage::fromLoader(new SimpleLoader()));
+    }
+}
+
+class SimpleLoader implements LoaderInterface
+{
+    public function load()
+    {
+        return ['foo', 'bar'];
+    }
 }

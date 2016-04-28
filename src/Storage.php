@@ -43,4 +43,15 @@ class Storage implements StorageInterface
 
         return $this;
     }
+
+    /**
+     * Create new Storage object based on data, provided by passed loader
+     *
+     * @param LoaderInterface $loader
+     * @return static
+     */
+    public static function fromLoader(LoaderInterface $loader)
+    {
+        return new static($loader->load());
+    }
 }
