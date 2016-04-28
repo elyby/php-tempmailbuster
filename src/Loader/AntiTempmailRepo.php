@@ -55,8 +55,6 @@ class AntiTempmailRepo implements LoaderInterface
      * 1. if this library and data repository are included in project as composer dependencies;
      * 2. if this library is deployed for development (data repository included as composer dependency to this library).
      *
-     * @see Loader::customPath for custom data repository implementation
-     *
      * @return array
      */
     protected function getPaths()
