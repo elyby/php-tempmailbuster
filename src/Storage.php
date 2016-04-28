@@ -1,7 +1,7 @@
 <?php
 namespace Ely\TempMailBuster;
 
-class Storage
+class Storage implements StorageInterface
 {
     /**
      * @var array of strings, which contains masks for temp mail services
@@ -17,7 +17,7 @@ class Storage
     }
 
     /**
-     * @return array with current items
+     * @inheritdoc
      */
     public function getItems()
     {
@@ -25,20 +25,18 @@ class Storage
     }
 
     /**
-     * @param array $items override current items with passed values
-     * @return static
+     * @inheritdoc
      */
-    public function setItems(array $items)
+    public function setItems($items)
     {
-        $this->items = $items;
+        $this->items = (array)$items;
         return $this;
     }
 
     /**
-     * @param string|array $items item or items, that will be merged to items
-     * @return static
+     * @inheritdoc
      */
-    public function append($items)
+    public function appendItems($items)
     {
         $items = (array)$items;
         $this->items = array_merge($this->items, $items);

@@ -4,11 +4,11 @@ namespace Ely\TempMailBuster;
 class TempMailBuster
 {
     /**
-     * @var Storage
+     * @var StorageInterface
      */
     private $primaryStorage;
     /**
-     * @var Storage|null
+     * @var StorageInterface|null
      */
     private $secondaryStorage;
     /**
@@ -17,9 +17,10 @@ class TempMailBuster
     private $isWhitelistMode = false;
 
     /**
-     * @param Storage $storage
+     * @param StorageInterface $primaryStorage
+     * @param StorageInterface|null $secondaryStorage
      */
-    public function __construct(Storage $primaryStorage, Storage $secondaryStorage = null)
+    public function __construct(StorageInterface $primaryStorage, StorageInterface $secondaryStorage = null)
     {
         $this->primaryStorage = $primaryStorage;
         $this->secondaryStorage = $secondaryStorage;
@@ -62,7 +63,7 @@ class TempMailBuster
     }
 
     /**
-     * @return Storage
+     * @return StorageInterface
      */
     public function getPrimaryStorage()
     {
@@ -70,17 +71,17 @@ class TempMailBuster
     }
 
     /**
-     * @param Storage $primaryStorage
+     * @param StorageInterface $primaryStorage
      * @return static
      */
-    public function setPrimaryStorage(Storage $primaryStorage)
+    public function setPrimaryStorage(StorageInterface $primaryStorage)
     {
         $this->primaryStorage = $primaryStorage;
         return $this;
     }
 
     /**
-     * @return Storage|null
+     * @return StorageInterface|null
      */
     public function getSecondaryStorage()
     {
@@ -88,10 +89,10 @@ class TempMailBuster
     }
 
     /**
-     * @param Storage|null $secondaryStorage
+     * @param StorageInterface|null $secondaryStorage
      * @return static
      */
-    public function setSecondaryStorage(Storage $secondaryStorage = null)
+    public function setSecondaryStorage(StorageInterface $secondaryStorage = null)
     {
         $this->secondaryStorage = $secondaryStorage;
         return $this;
