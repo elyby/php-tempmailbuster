@@ -1,7 +1,7 @@
 <?php
 namespace Ely\TempMailBuster;
 
-class TempMailBuster
+class Validator
 {
     /**
      * @var StorageInterface
