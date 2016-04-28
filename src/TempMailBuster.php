@@ -6,22 +6,23 @@ class TempMailBuster
     /**
      * @var Storage
      */
-    private $storage;
+    private $primaryStorage;
+    /**
+     * @var Storage|null
+     */
+    private $secondaryStorage;
+    /**
+     * @var bool
+     */
+    private $isWhitelistMode = false;
 
     /**
      * @param Storage $storage
      */
-    public function __construct(Storage $storage)
+    public function __construct(Storage $primaryStorage, Storage $secondaryStorage = null)
     {
-        $this->storage = $storage;
-    }
-
-    /**
-     * @return Storage
-     */
-    public function getStorage()
-    {
-        return $this->storage;
+        $this->primaryStorage = $primaryStorage;
+        $this->secondaryStorage = $secondaryStorage;
     }
 
     /**
@@ -35,12 +36,85 @@ class TempMailBuster
     public function validate($email)
     {
         $domain = $this->getDomain($email);
-        $tempMailsRegex = $this->buildRegex($this->getStorage()->getBlacklist());
-        $match = preg_match($tempMailsRegex, $domain);
+        $secondaryStorage = $this->secondaryStorage;
+        if ($secondaryStorage === null) {
+            $secondaryStorage = new Storage();
+        }
 
-        // TODO: add support for whitelists
+        if (!$this->isWhitelistMode) {
+            $blacklist = $this->primaryStorage;
+            $whitelist = $secondaryStorage;
+        } else {
+            $blacklist = $secondaryStorage;
+            $whitelist = $this->primaryStorage;
+        }
 
-        return !$match;
+        $blacklistRegex = $this->buildRegex($blacklist->getItems());
+        $match = !!preg_match($blacklistRegex, $domain);
+        if ($match == $this->isWhitelistMode) {
+            return !$this->isWhitelistMode;
+        }
+
+        $whitelistRegex = $this->buildRegex($whitelist->getItems());
+        $match = !!preg_match($whitelistRegex, $domain);
+
+        return $match;
+    }
+
+    /**
+     * @return Storage
+     */
+    public function getPrimaryStorage()
+    {
+        return $this->primaryStorage;
+    }
+
+    /**
+     * @param Storage $primaryStorage
+     * @return static
+     */
+    public function setPrimaryStorage(Storage $primaryStorage)
+    {
+        $this->primaryStorage = $primaryStorage;
+        return $this;
+    }
+
+    /**
+     * @return Storage|null
+     */
+    public function getSecondaryStorage()
+    {
+        return $this->secondaryStorage;
+    }
+
+    /**
+     * @param Storage|null $secondaryStorage
+     * @return static
+     */
+    public function setSecondaryStorage(Storage $secondaryStorage = null)
+    {
+        $this->secondaryStorage = $secondaryStorage;
+        return $this;
+    }
+
+    /**
+     * @return bool is enabled whitelist mode
+     */
+    public function isIsWhitelistMode()
+    {
+        return $this->isWhitelistMode;
+    }
+
+    /**
+     * Switching validator working mode
+     *
+     * @param bool $enable
+     * @return static
+     */
+    public function whitelistMode($enable = true)
+    {
+        $this->isWhitelistMode = $enable;
+        return $this;
     }
 
     /**

@@ -4,45 +4,45 @@ namespace Ely\TempMailBuster;
 class Storage
 {
     /**
-     * @var array of string, which contains masks for temp mail services
+     * @var array of strings, which contains masks for temp mail services
      */
-    private $blacklist;
+    private $items;
 
     /**
-     * @param array $blacklist
+     * @param array $items
      */
-    public function __construct(array $blacklist = [])
+    public function __construct(array $items = [])
     {
-        $this->blacklist = $blacklist;
+        $this->items = $items;
     }
 
     /**
-     * @return array with current blacklist
+     * @return array with current items
      */
-    public function getBlacklist()
+    public function getItems()
     {
-        return $this->blacklist;
+        return $this->items;
     }
 
     /**
-     * @param string|array $items item or items, that will be merged to blacklist
+     * @param array $items override current items with passed values
      * @return static
      */
-    public function appendToBlacklist($items)
+    public function setItems(array $items)
     {
-        $items = (array)$items;
-        $this->blacklist = array_merge($this->blacklist, $items);
-
+        $this->items = $items;
         return $this;
     }
 
     /**
-     * @param array $items override current blacklist with passed values
+     * @param string|array $items item or items, that will be merged to items
      * @return static
      */
-    public function setBlacklist(array $items)
+    public function append($items)
     {
-        $this->blacklist = $items;
+        $items = (array)$items;
+        $this->items = array_merge($this->items, $items);
+
         return $this;
     }
 }

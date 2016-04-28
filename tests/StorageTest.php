@@ -3,27 +3,27 @@ namespace Ely\TempMailBuster;
 
 class StorageTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetBlackList()
+    public function testGetItems()
     {
         $storage = new Storage(['item']);
-        $this->assertEquals(['item'], $storage->getBlacklist());
+        $this->assertEquals(['item'], $storage->getItems());
     }
 
-    public function testAppendToBlacklist()
+    public function testAppend()
     {
         $storage = new Storage(['item1']);
-        $this->assertEquals($storage, $storage->appendToBlacklist(['item2']));
-        $this->assertEquals(['item1', 'item2'], $storage->getBlacklist());
+        $this->assertEquals($storage, $storage->append(['item2']));
+        $this->assertEquals(['item1', 'item2'], $storage->getItems());
 
         $storage = new Storage(['item1']);
-        $this->assertEquals($storage, $storage->appendToBlacklist('item2'));
-        $this->assertEquals(['item1', 'item2'], $storage->getBlacklist());
+        $this->assertEquals($storage, $storage->append('item2'));
+        $this->assertEquals(['item1', 'item2'], $storage->getItems());
     }
 
-    public function testSetBlacklist()
+    public function testSetItems()
     {
         $storage = new Storage(['item1']);
-        $this->assertEquals($storage, $storage->setBlacklist(['item2']));
-        $this->assertEquals(['item2'], $storage->getBlacklist());
+        $this->assertEquals($storage, $storage->setItems(['item2']));
+        $this->assertEquals(['item2'], $storage->getItems());
     }
 }
