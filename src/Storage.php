@@ -4,7 +4,7 @@ namespace Ely\TempMailBuster;
 class Storage implements StorageInterface
 {
     /**
-     * @var array of strings, which contains masks for temp mail services
+     * @var array of strings, which contains REGEXP masks for temp mail services
      */
     private $items;
 
