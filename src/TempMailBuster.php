@@ -51,7 +51,7 @@ class TempMailBuster
 
         $blacklistRegex = $this->buildRegex($blacklist->getItems());
         $match = !!preg_match($blacklistRegex, $domain);
-        if ($match == $this->isWhitelistMode) {
+        if ($match === $this->isWhitelistMode) {
             return !$this->isWhitelistMode;
         }
 
