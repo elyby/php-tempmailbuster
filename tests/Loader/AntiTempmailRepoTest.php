@@ -22,11 +22,32 @@ class AntiTempmailRepoTest extends \PHPUnit_Framework_TestCase
         $loader = new AntiTempmailRepoWithInvalidJson();
         $loader->load();
     }
+
+    public function testGetSearchPaths()
+    {
+        $loader = new AntiTempmailRepo();
+        $this->assertTrue(is_array($loader->getSearchPaths()));
+    }
+
+    public function testSetSearchPaths()
+    {
+        $path = __DIR__ . '/test.json';
+
+        $loader = new AntiTempmailRepo();
+        $loader->setSearchPaths([$path]);
+        $this->assertTrue(is_array($loader->getSearchPaths()));
+        $this->assertEquals([$path], $loader->getSearchPaths());
+
+        $loader = new AntiTempmailRepo();
+        $loader->setSearchPaths($path);
+        $this->assertTrue(is_array($loader->getSearchPaths()));
+        $this->assertEquals([$path], $loader->getSearchPaths());
+    }
 }
 
 class AntiTempmailRepoWithWrongPaths extends AntiTempmailRepo
 {
-    protected function getPaths()
+    public function getSearchPaths()
     {
         return [
             __DIR__ . '/virtual_reality.json',
@@ -36,7 +57,7 @@ class AntiTempmailRepoWithWrongPaths extends AntiTempmailRepo
 
 class AntiTempmailRepoWithInvalidJson extends AntiTempmailRepo
 {
-    protected function getPaths()
+    public function getSearchPaths()
     {
         return [
             __DIR__ . '/AntiTempmailRepoTest.php',

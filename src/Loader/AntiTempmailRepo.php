@@ -10,24 +10,25 @@ use Exception;
 class AntiTempmailRepo implements LoaderInterface
 {
     /**
-     * @var array with custom paths to find data file
+     * File path array to data repository.
+     *
+     * Default paths are used in following cases:
+     * 1. if this library and data repository are included in project as composer dependencies;
+     * 2. if this library is deployed for development (data repository included as composer dependency to this library).
+     *
+     * @return array
      */
-    private $customPaths;
-
-    /**
-     * @param array $customPaths
-     */
-    public function __construct(array $customPaths = [])
-    {
-        $this->customPaths = $customPaths;
-    }
+    private $searchPaths = [
+        __DIR__ . '/../../../anti-tempmail-repo/data.json',
+        __DIR__ . '/../../vendor/ely/anti-tempmail-repo/data.json',
+    ];
 
     /**
      * @inheritdoc
      */
     public function load()
     {
-        $paths = $this->getPaths();
+        $paths = $this->getSearchPaths();
         $dataPath = null;
         foreach($paths as $path) {
             if (file_exists($path)) {
@@ -49,19 +50,18 @@ class AntiTempmailRepo implements LoaderInterface
     }
 
     /**
-     * Generates file path array to data repository.
-     *
-     * Default paths are used in following cases:
-     * 1. if this library and data repository are included in project as composer dependencies;
-     * 2. if this library is deployed for development (data repository included as composer dependency to this library).
-     *
      * @return array
      */
-    protected function getPaths()
+    public function getSearchPaths()
     {
-        return array_merge($this->customPaths, [
-            __DIR__ . '/../../../anti-tempmail-repo/data.json',
-            __DIR__ . '/../../vendor/ely/anti-tempmail-repo/data.json',
-        ]);
+        return $this->searchPaths;
+    }
+
+    /**
+     * @param array|string $path
+     */
+    public function setSearchPaths($path)
+    {
+        $this->searchPaths = (array)$path;
     }
 }
