@@ -1,6 +1,8 @@
 # PHP Tempmail Buster
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
+[![Total Downloads][ico-downloads]][link-downloads]
 
 Расширяемый класс для блокировки E-mail адресов определённых доменов или организации белого списка допустимых доменов.
 Реализует лоадер для загрузки и валидации по списку из [Anti Tempmail Repo](https://github.com/elyby/anti-tempmail-repo).
@@ -60,7 +62,9 @@ This package was designed and developed within the [Ely.by](http://ely.by) proje
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
+[ico-version]: https://img.shields.io/packagist/v/ely/php-tempmailbuster.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/ely/php-tempmailbuster.svg?style=flat-square
 
 [link-author]: https://github.com/ErickSkrauch
 [link-contributors]: ../../contributors
