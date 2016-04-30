@@ -1,16 +1,22 @@
 {
     "name": "ely/php-tempmailbuster",
+    "description": "Control emails with black and white lists; make lists of domains using regular expressions and validate emails with them",
+    "keywords": ["email", "validation"],
+    "homepage": "https://github.com/elyby/anti-tempmail-repo",
     "license": "MIT",
     "type": "library",
     "authors": [
+        {
+            "name": "Ely.by team",
+            "email": "team@ely.by"
+        },
         {
             "name": "ErickSkrauch",
             "email": "erickskrauch@ely.by"
         }
     ],
     "require": {
-        "php" : "~5.4|~7.0",
-        "lib-curl" : "*",
+        "php" : "~5.4 | ~7.0",
         "ely/anti-tempmail-repo" : "*"
     },
     "require-dev": {
@@ -23,7 +29,7 @@
                 "name": "ely/anti-tempmail-repo",
                 "version": "0.0.0",
                 "source": {
-                    "url": "https://github.com/elyby/anti-tempmail-repo",
+                    "url": "https://github.com/elyby/anti-tempmail-repo.git",
                     "type": "git",
                     "reference": "master"
                 }
