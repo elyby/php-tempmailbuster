@@ -22,8 +22,8 @@ class Validator
      */
     public function __construct(StorageInterface $primaryStorage, StorageInterface $secondaryStorage = null)
     {
-        $this->primaryStorage = $primaryStorage;
-        $this->secondaryStorage = $secondaryStorage;
+        $this->setPrimaryStorage($primaryStorage);
+        $this->setSecondaryStorage($secondaryStorage);
     }
 
     /**

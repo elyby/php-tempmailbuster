@@ -13,7 +13,7 @@ class Storage implements StorageInterface
      */
     public function __construct(array $items = [])
     {
-        $this->items = $items;
+        $this->setItems($items);
     }
 
     /**
