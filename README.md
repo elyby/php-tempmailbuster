@@ -4,8 +4,9 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-A package to protect your application from users with temp emails. Uses [Anti Tempmail Repo](https://github.com/elyby/anti-tempmail-repo) as a default blacklist source.
-Provides an extendable class for E-mail validation based on black- or whitelist.
+A package to protect your application from users with temp emails. Uses
+[Anti Tempmail Repo](https://github.com/elyby/anti-tempmail-repo) as a default blacklist source. Provides an extendable
+class for E-mail validation based on black- or whitelist.
 
 ## Intallation
 
@@ -40,7 +41,9 @@ $validator->validate('team@ely.by'); // = false
 $validator->validate('hy42k@sendspamhere.com'); // = true
 ```
 
-Validator constructor accepts 2 arguments: primary and secondary storages. Primary storage is used for validation based on current mode (whitelist/blacklist). Secondary storage (if provided) allows you to add exceptions from primary storage rules.
+Validator constructor accepts 2 arguments: primary and secondary storages. Primary storage is used for validation based
+on current mode (whitelist/blacklist). Secondary storage (if provided) allows you to add exceptions from primary
+storage rules.
 
 For more usage examples please take a look on [tests](tests/ValidatorTest.php).
 
