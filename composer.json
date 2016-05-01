@@ -17,7 +17,7 @@
     ],
     "require": {
         "php" : "~5.4 | ~7.0",
-        "ely/anti-tempmail-repo" : "*"
+        "ely/anti-tempmail-repo" : "~0.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8 || ~5.0"
