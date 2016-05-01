@@ -4,10 +4,10 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Расширяемый класс для блокировки E-mail адресов определённых доменов или организации белого списка допустимых доменов.
-Реализует лоадер для загрузки и валидации по списку из [Anti Tempmail Repo](https://github.com/elyby/anti-tempmail-repo).
+A package to protect your application from users with temp emails. Uses [Anti Tempmail Repo](https://github.com/elyby/anti-tempmail-repo) as a default blacklist source.
+Provides an extendable class for E-mail validation based on black- or whitelist.
 
-## Установка
+## Intallation
 
 Install the latest version with
 
@@ -15,35 +15,34 @@ Install the latest version with
 $ composer require ely/php-tempmailbuster
 ```
 
-## Использование
+## Usage
 
-Пример использования с применением стандартного лоадера:
+Validation example using default loader:
 
 ```php
 use Ely\TempMailBuster\Loader\AntiTempmailRepo;
 use Ely\TempMailBuster\Storage;
 use Ely\TempMailBuster\Validator;
 
-// Создаём класс лоадера
 $loader = new AntiTempmailRepo();
-// Загружаем из него данные и передаём их в объект хранилища
-$storage = new Storage($loader->load();
-// или используем статичный метод для работы с лоадерами
+// A storage can be instantiated by feeding it with an array of patterns:
+$storage = new Storage($loader->load());
+// or created from loader instance
 $storage = Storage::fromLoader($loader);
-// Создаём класс-валидатор
+
 $validator = new Validator($storage);
 $validator->validate('team@ely.by'); // = true
 $validator->validate('hy42k@sendspamhere.com'); // = false
 
-// Включаем режим белого списка
+// Enable whitelisting mode
 $validator->whitelistMode();
 $validator->validate('team@ely.by'); // = false
 $validator->validate('hy42k@sendspamhere.com'); // = true
 ```
 
-Конструктор принимает 2 аргумента: первичное и вторичное хранилище. Первичное хранилище работает в соответствии с
-выбранным режимом работы библиотеки, а вторичное (если указано) позволяет добавить исключение из правил. Смотрите
-больше примеров вызова метода `validate()` в [тестах](tests/ValidatorTest.php).
+Validator constructor accepts 2 arguments: primary and secondary storages. Primary storage is used for validation based on current mode (whitelist/blacklist). Secondary storage (if provided) allows you to add exceptions from primary storage rules.
+
+For more usage examples please take a look on [tests](tests/ValidatorTest.php).
 
 ## Change log
 
