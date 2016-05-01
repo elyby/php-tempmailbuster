@@ -22,20 +22,6 @@
     "require-dev": {
         "phpunit/phpunit": "~4.8 || ~5.0"
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "ely/anti-tempmail-repo",
-                "version": "0.0.0",
-                "source": {
-                    "url": "https://github.com/elyby/anti-tempmail-repo.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Ely\\TempMailBuster\\": "src"
